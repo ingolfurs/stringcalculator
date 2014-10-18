@@ -3,15 +3,7 @@ package is.ru.stringcalculator;
 public class Calculator {
 
 	public static int add(String text){
-		text = text.replace("\n",",");
-
-		/* Handle different delimiter */
-		if (text.length() > 2 && text.substring(0,2).equals("//")) {
-			String delimiter = text.substring(2,3);
-			text = text.replace(delimiter,",");
-			text = text.substring(4,text.length());
-		}
-
+		text = handleDelimiter(text);
 		return sum(splitNumbers(text));
 	}
 
@@ -32,5 +24,17 @@ public class Calculator {
 			total += toInt(number);
 		}
 		return total;
+	}
+
+	private static String handleDelimiter(String text) {
+		text = text.replace("\n",",");
+
+		/* Handle different delimiter */
+		if (text.length() > 2 && text.substring(0,2).equals("//")) {
+			String delimiter = text.substring(2,3);
+			text = text.replace(delimiter,",");
+			text = text.substring(4,text.length());
+		}
+		return text;
 	}
 }
