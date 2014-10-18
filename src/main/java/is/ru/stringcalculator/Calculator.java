@@ -24,8 +24,8 @@ public class Calculator {
 		ArrayList<String> error = new ArrayList<String>();
 		for(String number : numbers){
 			int num = toInt(number);
-			if (num < 0)
-				error.add(number);
+			if (num < 0) error.add(number);
+			if (num >= 1000) continue;
 			total += num;
 		}
 		if (!error.isEmpty()) {
