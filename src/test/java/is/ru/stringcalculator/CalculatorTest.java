@@ -3,8 +3,7 @@ package is.ru.stringcalculator;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 import org.junit.Before;
-import static org.junit.Assert.*;
-//import org.junit.Rules.ExpextedException;
+import static org.junit.Assert.fail;
 
 public class CalculatorTest {
 
@@ -63,6 +62,11 @@ public class CalculatorTest {
 	@Test
 	public void testIgnoreNumbersBiggerThan1000(){
 		assertEquals(2, Calculator.add("1000,2"));
+	}
+
+	@Test
+	public void testDelimiterOfAnyLength(){
+		assertEquals(6, Calculator.add("//[***]\n1***2***3"));
 	}
 
 }

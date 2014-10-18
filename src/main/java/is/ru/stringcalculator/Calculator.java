@@ -1,5 +1,7 @@
 package is.ru.stringcalculator;
 import java.util.ArrayList;
+//import java.util.regex.Pattern;
+//import java.util.regex.Matcher;
 
 public class Calculator {
 
@@ -16,7 +18,7 @@ public class Calculator {
 		/* Empty string */
 		if (numbers.isEmpty())
 			return new String[0];
-		return numbers.split(",");
+		return numbers.split(",|\n");
 	}
 
 	private static int sum(String[] numbers){
@@ -38,13 +40,20 @@ public class Calculator {
 	}
 
 	private static String handleDelimiter(String text) {
-		text = text.replace("\n",",");
-
+		String delimiter;
 		/* Handle different delimiter */
 		if (text.length() > 2 && text.substring(0,2).equals("//")) {
-			String delimiter = text.substring(2,3);
-			text = text.replace(delimiter,",");
-			text = text.substring(4,text.length());
+			if (text.contains("[") && text.contains("]")) {
+				delimiter = text.substring(3,text.indexOf("]"));
+				text = text.replace(delimiter,",");
+				text = text.replace("\n","");
+				text = text.substring(text.indexOf("]")+1,text.length());
+			}
+			else { 
+				delimiter = text.substring(2,3);	
+				text = text.replace(delimiter,",");
+				text = text.substring(4,text.length());
+			}
 		}
 		return text;
 	}
